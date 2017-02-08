@@ -4,8 +4,7 @@ import InlineStyleControls from './InlineStyleControls.jsx';
 import BlockStyleControls from './BlockStyleControls.jsx';
 import SaveButton from './SaveButton.jsx';
 import './css/Editor.css';
-
-
+import axios from 'axios';
 
 function getBlockStyle (block) {
     switch (block.getType()) {
@@ -59,7 +58,7 @@ class PostEditor extends Component {
               </div>
             </div>
 
-            <SaveButton getData={this.convertTextToSave(this.state.editorState)}/>
+            <SaveButton handleSave={this.onSave}/>
             </div>
         );
     }
@@ -100,7 +99,23 @@ class PostEditor extends Component {
     }
 
     convertTextToSave = (data) => {
-       data
+
+        // console.log('Button clicked ')
+
+        const postBody = convertToRaw(data)
+       console.log(convertToRaw(data))
+
+       axios.post("http://localhost:3000/api/posts", {
+           title:"Posts",
+           body:postBody
+       })
+       .then((response) => {
+           console.log(response)
+       })
+    }
+
+    onSave = () => {
+        this.convertTextToSave(this.state.editorState.getCurrentContent())
     }
 }
 

@@ -9,7 +9,7 @@ class SaveButton extends Component {
         );
     }
 
-   handleSave = (html) =>{
+   handleSave = () =>{
         this.props.handleSave()
     }
 }
