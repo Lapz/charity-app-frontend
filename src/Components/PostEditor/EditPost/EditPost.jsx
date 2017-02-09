@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PostEditor from '../PostEditor.jsx';
+import EditEditor from './EditEditor.jsx';
 import axios from 'axios';
 import {convertFromRaw, EditorState} from 'draft-js';
 class EditPost extends Component {
@@ -14,7 +14,7 @@ class EditPost extends Component {
     render() {
         return (
             <div>
-                <PostEditor savedState={this.state.savedState}/>
+                <EditEditor savedState={this.state.savedState}/>
             </div>
         );
     }
