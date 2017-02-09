@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import {Router, Route, browserHistory} from 'react-router';
-import ViewPost from './Components/ViewPosts/ViewPost.jsx'
-
+import ViewPost from './Components/ViewPosts/ViewPost.jsx';
+import EditPost from './Components/PostEditor/EditPost/EditPost.jsx';
 import PostEditor from './Components/PostEditor/PostEditor.jsx';
 // import StationSearch from './Components/StationSearch/StationSearch.jsx';
 // import LineStatus from './Components/LineStatus/LineItemContainer.jsx';
@@ -18,6 +18,7 @@ class Index extends Component {
         <Route component={App}>
           <Route component={ViewPost} path="/viewPosts"></Route>
           <Route component={PostEditor} path={"/add"}></Route>
+          <Route component={EditPost} path={"/edit/:post_id"}></Route>
         </Route>
 
       </Router>

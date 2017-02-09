@@ -36,7 +36,7 @@ class PostEditor extends Component {
 
     render() {
 
-        const {editorState} = this.state;
+        const {editorState} = this.props.savedState || this.state;
 
         // If the user changes block type before entering any text, we can either style
         // the placeholder or hide it. Let's just hide it now.
@@ -120,7 +120,7 @@ class PostEditor extends Component {
 
         if (data.hasText()) {
             const postTitle = this.state.title
-            const postBody = convertToRaw(data)
+            const postBody = JSON.stringify(convertToRaw(data))
 
             console.log(data.hasText())
             console.log(convertToRaw(data))
