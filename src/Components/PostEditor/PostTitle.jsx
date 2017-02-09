@@ -4,7 +4,7 @@ class PostTitle extends Component {
     render() {
         return (
             <div>
-                <input  ref="titleText" onChange={this.handleInput} placeholder="Enter  a title"/>
+                <input  ref="titleText" onChange={this.handleInput} placeholder={this.props.titleValuse||"Enter  a title"}/>
             </div>
         );
     }

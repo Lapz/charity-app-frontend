@@ -14,7 +14,11 @@ class EditPost extends Component {
     render() {
         return (
             <div>
+<<<<<<< HEAD
                 <EditEditor savedState={this.state.savedState}/>
+=======
+                <PostEditor savedState={this.state.savedState} postTitle={this.state.title}/>
+>>>>>>> b9472361b7819026f29ba682d3503551f6af3d07
             </div>
         );
     }
@@ -28,14 +32,15 @@ class EditPost extends Component {
             .then((response) => {
                 console.log(response)
 
-                return JSON.parse(response.data.body)
+                 const newSavedState = EditorState.createWithContent(convertFromRaw(JSON.parse(response.data.body)))
 
-            })
-            .then((parsedData) => {
-                console.log(parsedData)
-                const newSavedState = EditorState.createWithContent(convertFromRaw(parsedData))
-                console.log(newSavedState)
-                this.setState({savedState: newSavedState})
+                 console.log(newSavedState)
+
+                 this.setState({
+                     savedState: newSavedState,
+                     title:response.data.title
+                 })
+
             })
     }
 

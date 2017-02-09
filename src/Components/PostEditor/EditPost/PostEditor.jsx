@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Editor, EditorState, RichUtils, convertToRaw} from 'draft-js';
-import InlineStyleControls from './InlineStyleControls.jsx';
-import BlockStyleControls from './BlockStyleControls.jsx';
-import SaveButton from './SaveButton.jsx';
-import PostTitle from './PostTitle.jsx'
-import './css/Editor.css';
+import InlineStyleControls from '../InlineStyleControls.jsx';
+import BlockStyleControls from '../BlockStyleControls.jsx';
+import SaveButton from '../SaveButton.jsx';
+import PostTitle from '../PostTitle.jsx'
+import '../css/Editor.css';
 import axios from 'axios';
 
 function getBlockStyle(block) {
@@ -28,8 +28,7 @@ class PostEditor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            editorState: EditorState.createEmpty(),
-            title: ""
+            editorState: EditorState.createEmpty()
         };
 
     }
@@ -37,7 +36,7 @@ class PostEditor extends Component {
     render() {
 
        
-       const {editorState} = this.state 
+       const {editorState} = EditorState.createWithContent(this.props.savedState)
 
        
 
@@ -53,8 +52,7 @@ class PostEditor extends Component {
 
         return (
             <div className="wrapper">
-
-                <PostTitle changeTitleState={this.changeTitle}/>
+                <PostTitle changeTitleState={this.changeTitle} titleValue={this.props.postTitle}/>
                 <div className="RichEditor-root">
                     <BlockStyleControls editorState={editorState} onToggle={this.toggleBlockType}/>
 
@@ -66,7 +64,7 @@ class PostEditor extends Component {
                         <Editor
                             blockStyleFn={getBlockStyle}
                             customStyleMap={styleMap}
-                            editorState={this.props.savedState||editorState}
+                            editorState={editorState}
                             handleKeyCommand={this.handleKeyCommand}
                             onChange={this.onChange}
                             onTab={this.onTab}
