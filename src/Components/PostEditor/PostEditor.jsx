@@ -117,18 +117,26 @@ class PostEditor extends Component {
     convertTextToSave = (data) => {
 
         // console.log('Button clicked ')
-        const postTitle = this.state.title
-        const postBody = convertToRaw(data)
-        console.log(convertToRaw(data))
 
-        axios
-            .post("http://localhost:3000/api/posts", {
-            title: postTitle,
-            textBody: postBody
-        })
-            .then((response) => {
-                console.log(response)
+        if (data.hasText()) {
+            const postTitle = this.state.title
+            const postBody = convertToRaw(data)
+
+            console.log(data.hasText())
+            console.log(convertToRaw(data))
+
+            axios
+                .post("http://localhost:3001/api/posts", {
+                title: postTitle,
+                textBody: postBody
             })
+                .then((response) => {
+                    console.log(response)
+                })
+        } else {
+            alert("Enter some fucking text");
+        }
+
     }
 
     onSave = () => {
@@ -136,9 +144,7 @@ class PostEditor extends Component {
     }
 
     changeTitle = (titleText) => {
-
         this.setState({title: titleText})
-        console.log("Text changed to " + titleText);
     }
 }
 
