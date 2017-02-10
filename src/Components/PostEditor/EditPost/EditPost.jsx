@@ -14,11 +14,10 @@ class EditPost extends Component {
     render() {
         return (
             <div>
-<<<<<<< HEAD
+
                 <EditEditor savedState={this.state.savedState}/>
-=======
-                <PostEditor savedState={this.state.savedState} postTitle={this.state.title}/>
->>>>>>> b9472361b7819026f29ba682d3503551f6af3d07
+
+                
             </div>
         );
     }
