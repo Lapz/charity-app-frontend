@@ -116,7 +116,7 @@ class PostEditor extends Component {
     toggleInlineStyle = (inlineStyle) => {
         this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, inlineStyle))
     }
-
+ //
     convertTextToSave = (data) => {
         
         if (data.hasText()) {
