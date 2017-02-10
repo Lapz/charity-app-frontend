@@ -7,40 +7,16 @@ class EditPost extends Component {
     constructor() {
         super()
         this.state = {
-            savedState: ""
+            savedState: {}
         }
     }
 
     render() {
         return (
             <div>
-
-                <EditEditor savedState={this.state.savedState}/>
-
-                
+                <EditEditor post_id ={this.props.params.post_id} post_title={this.state.title}/>
             </div>
         );
-    }
-    componentDidMount() {
-
-        const post_id = this.props.params.post_id;
-
-        console.log(post_id)
-        axios
-            .get(`http://localhost:3001/api/posts/${post_id}`)
-            .then((response) => {
-                console.log(response)
-
-                 const newSavedState = EditorState.createWithContent(convertFromRaw(JSON.parse(response.data.body)))
-
-                 console.log(newSavedState)
-
-                 this.setState({
-                     savedState: newSavedState,
-                     title:response.data.title
-                 })
-
-            })
     }
 
 }
