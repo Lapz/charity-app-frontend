@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {Editor, EditorState, RichUtils, convertToRaw} from 'draft-js';
-import InlineStyleControls from '../InlineStyleControls.jsx';
-import BlockStyleControls from '../BlockStyleControls.jsx';
-import SaveButton from '../SaveButton.jsx';
-import PostTitle from '../PostTitle.jsx'
-import '../css/Editor.css';
+import {Editor, EditorState, RichUtils, convertFromRaw, convertToRaw} from 'draft-js';
+import InlineStyleControls from '../PostEditor/InlineStyleControls.jsx';
+import BlockStyleControls from '../PostEditor/BlockStyleControls.jsx';
+import SaveButton from '../PostEditor/SaveButton.jsx';
+import EditPostTitle from './EditPostTitle.jsx'
+import './css/Editor.css';
 import axios from 'axios';
 
 function getBlockStyle(block) {
@@ -24,7 +24,7 @@ const styleMap = {
     }
 };
 
-class PostEditor extends Component {
+class EditEditor extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,15 +34,28 @@ class PostEditor extends Component {
 
     }
 
+    componentDidMount() {
+
+        axios
+            .get(`http://localhost:3001/api/posts/${this.props.post_id}`)
+            .then((response) => {
+                console.log(response)
+
+                const newSavedState = EditorState.createWithContent(convertFromRaw(JSON.parse(response.data.body)))
+
+                this.setState({editorState: newSavedState, title: response.data.title})
+
+            })
+
+    }
+
     render() {
 
-        ".//"
-
-        const {editorState} = this.props.savedState 
-
+        const {editorState} = this.state
         // If the user changes block type before entering any text, we can either style
         // the placeholder or hide it. Let's just hide it now.
         let className = 'RichEditor-editor';
+
         var contentState = editorState.getCurrentContent();
         if (!contentState.hasText()) {
             if (contentState.getBlockMap().first().getType() !== 'unstyled') {
@@ -53,7 +66,7 @@ class PostEditor extends Component {
         return (
             <div className="wrapper">
 
-                <PostTitle changeTitleState={this.changeTitle}/>
+                <EditPostTitle value={this.state.title} handleTitleChange={this.changeTitle}/>
                 <div className="RichEditor-root">
                     <BlockStyleControls editorState={editorState} onToggle={this.toggleBlockType}/>
 
@@ -69,7 +82,6 @@ class PostEditor extends Component {
                             handleKeyCommand={this.handleKeyCommand}
                             onChange={this.onChange}
                             onTab={this.onTab}
-                            placeholder="Write a post"
                             ref="editor"
                             spellCheck={true}/>
                     </div>
@@ -127,10 +139,18 @@ class PostEditor extends Component {
             console.log(data.hasText())
             console.log(convertToRaw(data))
 
+            var editDate = new Date()
+
+            var x = JSON.stringify(editDate);
+
+            console.log(x)
+
             axios
-                .post("http://localhost:3001/api/posts", {
+                .put(`http://localhost:3001/api/posts/${this.props.post_id}`, {
                 title: postTitle,
-                textBody: postBody
+                textBody: postBody,
+                editedDate: x
+
             })
                 .then((response) => {
                     console.log(response)
@@ -145,9 +165,10 @@ class PostEditor extends Component {
         this.convertTextToSave(this.state.editorState.getCurrentContent())
     }
 
-    changeTitle = (titleText) => {
-        this.setState({title: titleText})
+    changeTitle = (event) => {
+        this.setState({title: event.target.value})
     }
+
 }
 
-export default PostEditor;
+export default EditEditor;
