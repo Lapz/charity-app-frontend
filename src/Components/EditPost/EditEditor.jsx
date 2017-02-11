@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Editor, EditorState, RichUtils, convertFromRaw, convertToRaw} from 'draft-js';
-import InlineStyleControls from '../InlineStyleControls.jsx';
-import BlockStyleControls from '../BlockStyleControls.jsx';
-import SaveButton from '../SaveButton.jsx';
+import InlineStyleControls from '../PostEditor/InlineStyleControls.jsx';
+import BlockStyleControls from '../PostEditor/BlockStyleControls.jsx';
+import SaveButton from '../PostEditor/SaveButton.jsx';
 import EditPostTitle from './EditPostTitle.jsx'
-import '../css/Editor.css';
+import './css/Editor.css';
 import axios from 'axios';
 
 function getBlockStyle(block) {
@@ -139,10 +139,18 @@ class EditEditor extends Component {
             console.log(data.hasText())
             console.log(convertToRaw(data))
 
+            var editDate = new Date()
+
+            var x = JSON.stringify(editDate);
+
+            console.log(x)
+
             axios
                 .put(`http://localhost:3001/api/posts/${this.props.post_id}`, {
                 title: postTitle,
-                textBody: postBody
+                textBody: postBody,
+                editedDate: x
+
             })
                 .then((response) => {
                     console.log(response)

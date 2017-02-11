@@ -4,7 +4,7 @@ import App from './App';
 import './index.css';
 import {Router, Route, browserHistory} from 'react-router';
 import ViewPost from './Components/ViewPosts/ViewPost.jsx';
-import EditPost from './Components/PostEditor/EditPost/EditPost.jsx';
+import EditPost from './Components/EditPost/EditPost.jsx';
 import PostEditor from './Components/PostEditor/PostEditor.jsx';
 // import StationSearch from './Components/StationSearch/StationSearch.jsx';
 // import LineStatus from './Components/LineStatus/LineItemContainer.jsx';
