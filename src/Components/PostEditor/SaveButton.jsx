@@ -1,16 +1,19 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 class SaveButton extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.handleSave}>Save</button>
+                <button onClick={this.handleClick}>Save a post
+                </button>
             </div>
         );
     }
 
-   handleSave = () =>{
-        this.props.handleSave()
+    handleClick = () => {
+        this
+            .props
+            .getEditorContent()
     }
 }
 

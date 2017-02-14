@@ -4,7 +4,7 @@ import App from './App';
 import './index.css';
 import {Router, Route, browserHistory, withRouter} from 'react-router';
 import ViewPost from './Components/ViewPosts/ViewPost.jsx';
-import EditPost from './Components/EditPost/EditPost.jsx';
+// import EditPost from './Components/EditPost/EditPost.jsx';
 import PostEditor from './Components/PostEditor/PostEditor.jsx';
 import Login from './Components/Login/Login.jsx'
 import axios from "axios"
@@ -31,7 +31,7 @@ class Index extends Component {
         <Route component={App} onEnter={this.checkIfAuth}>
           <Route component={ViewPost} path="/viewPosts"></Route>
           <Route component={PostEditor} path={"/add"}></Route>
-          <Route component={EditPost} path={"/edit/:post_id"}></Route>
+          {/*<Route component={EditPost} path={"/edit/:post_id"}></Route>*/}
         </Route>
 
       </Router>
