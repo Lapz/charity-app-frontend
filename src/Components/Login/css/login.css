@@ -1,0 +1,7 @@
+.login-wrapper {
+   display:flex;
+   justify-content: space-around;
+   flex-grow:1;
+   flex-basis: 200px;
+}
+
