@@ -6,7 +6,8 @@ import {Router, Route, browserHistory, withRouter} from 'react-router';
 import ViewPost from './Components/Admin/ViewPosts/ViewPost.jsx';
 import EditPost from './Components/Admin/EditPost/EditPost.jsx';
 import PostEditor from './Components/Admin/PostEditor/PostEditor.jsx';
-import Login from './Components/Admin/Login/Login.jsx'
+import Login from './Components/Admin/Login/Login.jsx';
+import ClientViewer from "./Components/Client/ClientViewer.jsx"
 import axios from "axios"
 
 // axios.defaults.headers.common["Authorization"] = this.state.token import
@@ -28,11 +29,17 @@ class Index extends Component {
   render() {
     return (
       <Router history={browserHistory}>
-        <Route component={(props) => <Login passUpToken={this.getToken}/>} path="/"></Route>
+        <Route
+          component={(props) => <Login passUpToken={this.getToken}/>}
+          path="/admin"></Route>
+
+        <Route component={ClientViewer} path="/"></Route>
+
         <Route component={App} onEnter={this.checkIfAuth}>
-          <Route component={ViewPost} path="/viewPosts"></Route>
-          <Route component={PostEditor} path={"/add"}></Route>
-          <Route component={EditPost} path={"/edit/:post_id"}></Route>
+
+          <Route component={ViewPost} path="admin/viewPosts"></Route>
+          <Route component={PostEditor} path={"admin/add"}></Route>
+          <Route component={EditPost} path={"admin/edit/:post_id"}></Route>
         </Route>
 
       </Router>
@@ -41,8 +48,6 @@ class Index extends Component {
   }
 
   checkIfAuth = () => {
-
-    console.log(this.state.token)
 
     if (this.state.token.length > 3) {
       axios({
