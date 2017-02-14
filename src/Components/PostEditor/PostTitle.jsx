@@ -4,13 +4,18 @@ class PostTitle extends Component {
     render() {
         return (
             <div>
-                <input  ref="titleText" onChange={this.handleInput} placeholder={this.props.titleValuse||"Enter  a title"}/>
+                <input
+                    ref="titleText"
+                    onChange={this.handleInput}
+                    placeholder={this.props.titleValue || "Enter a title"}/>
             </div>
         );
     }
 
-    handleInput= () => {
-        this.props.changeTitleState(this.refs.titleText.value)
+    handleInput = () => {
+        this
+            .props
+            .changeTitleState(this.refs.titleText.value)
     }
 }
 
