@@ -12,7 +12,8 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^3.0.2",
-    "react-simplemde-editor": "^3.6.10"
+    "react-simplemde-editor": "^3.6.10",
+    "remove-markdown": "^0.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

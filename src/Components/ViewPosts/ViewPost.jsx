@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import PostInfo from './PostInfo';
 import {convertFromRaw} from 'draft-js';
+
+const removeMd = require("remove-markdown")
+const marked = require("marked");
 class ViewPost extends Component {
 
     constructor() {
@@ -24,9 +27,7 @@ class ViewPost extends Component {
                 {(this.state.posts)
                     ? (this.state.posts.map((postItem, index) => {
 
-                        const postItemSummary = convertFromRaw(JSON.parse(postItem.body))
-                            .getFirstBlock()
-                            .getText()
+                        const postItemSummary = null || removeMd(postItem.body)
 
                         return (<PostInfo
                             title={postItem.title}

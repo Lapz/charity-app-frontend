@@ -9,8 +9,7 @@ class PostInfo extends Component {
                     <h1>{this.props.title}</h1>
                 </Link>
                 <div className="post-info-body">
-                    {this.props.postSummary}
-                </div>
+                    {this.props.postSummary}</div>
             </div>
         );
     }

@@ -38,8 +38,8 @@ class PostEditor extends Component {
 
         axios.post("http://localhost:3001/api/posts", {
             title: this.state.title,
-            body: JSON.stringify(this.state.textValue),
-            html: JSON.stringify(marked(this.state.textValue))
+            body: this.state.textValue,
+            html: marked(this.state.textValue)
         })
     }
     changeTitle = (value) => {
