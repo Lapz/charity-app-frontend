@@ -8,7 +8,7 @@ import EditPost from './Components/Admin/EditPost/EditPost.jsx';
 import PostEditor from './Components/Admin/PostEditor/PostEditor.jsx';
 import Login from './Components/Admin/Login/Login.jsx';
 import ClientViewer from "./Components/Client/ClientViewer.jsx"
-import Post from "./Components/Client/Post.jsx"
+import Post from "./Components/Client/Post"
 import axios from "axios"
 
 // axios.defaults.headers.common["Authorization"] = this.state.token import
