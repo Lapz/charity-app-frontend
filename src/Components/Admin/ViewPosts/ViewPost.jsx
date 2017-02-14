@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import PostInfo from './PostInfo';
-import {convertFromRaw} from 'draft-js';
-
 const removeMd = require("remove-markdown")
 const marked = require("marked");
 class ViewPost extends Component {

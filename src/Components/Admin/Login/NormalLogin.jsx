@@ -59,7 +59,7 @@ class NormalLogin extends Component {
             .then((response) => {
                 if (response.data.success == true) {
                     this.passUpJWT(response.data.token)
-                    browserHistory.push("/add")
+                    browserHistory.push("admin/add")
                 } else {
                     // console.log(response)
                     this

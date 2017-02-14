@@ -17,15 +17,15 @@ class NavBar extends Component {
                 <nav>
                     <ul>
                         <li>
-                            <Link to="/viewPosts">View posts</Link>
+                            <Link to="admin/viewPosts">View posts</Link>
                         </li>
 
                         <li>
-                            <Link to="/add">Add a new Post</Link>
+                            <Link to="admin/add">Add a new Post</Link>
                         </li>
 
                         <li>
-                            <Link to="/" onClick={this.logout}>Logout</Link>
+                            <Link to="/admin" onClick={this.logout}>Logout</Link>
                         </li>
 
                     </ul>

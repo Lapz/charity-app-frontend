@@ -8,6 +8,7 @@ import EditPost from './Components/Admin/EditPost/EditPost.jsx';
 import PostEditor from './Components/Admin/PostEditor/PostEditor.jsx';
 import Login from './Components/Admin/Login/Login.jsx';
 import ClientViewer from "./Components/Client/ClientViewer.jsx"
+import Post from "./Components/Client/Post.jsx"
 import axios from "axios"
 
 // axios.defaults.headers.common["Authorization"] = this.state.token import
@@ -34,6 +35,7 @@ class Index extends Component {
           path="/admin"></Route>
 
         <Route component={ClientViewer} path="/"></Route>
+        <Route component={Post} path="/post/:post_id"></Route>
 
         <Route component={App} onEnter={this.checkIfAuth}>
 
