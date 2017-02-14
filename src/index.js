@@ -3,17 +3,18 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import {Router, Route, browserHistory, withRouter} from 'react-router';
-import ViewPost from './Components/ViewPosts/ViewPost.jsx';
-import EditPost from './Components/EditPost/EditPost.jsx';
-import PostEditor from './Components/PostEditor/PostEditor.jsx';
-import Login from './Components/Login/Login.jsx'
+import ViewPost from './Components/Admin/ViewPosts/ViewPost.jsx';
+import EditPost from './Components/Admin/EditPost/EditPost.jsx';
+import PostEditor from './Components/Admin/PostEditor/PostEditor.jsx';
+import Login from './Components/Admin/Login/Login.jsx'
 import axios from "axios"
 
 // axios.defaults.headers.common["Authorization"] = this.state.token import
-// StationSearch from './Components/StationSearch/StationSearch.jsx'; import
-// LineStatus from './Components/LineStatus/LineItemContainer.jsx'; import
-// Favourite from './Components/Favourites/Favourites.jsx'; import Login from
-// './Components/Login/Login.jsx'; import * as firebase from 'firebase';
+// StationSearch from './Components/Admin/StationSearch/StationSearch.jsx';
+// import LineStatus from './Components/Admin/LineStatus/LineItemContainer.jsx';
+// import Favourite from './Components/Admin/Favourites/Favourites.jsx'; import
+// Login from './Components/Admin/Login/Login.jsx'; import * as firebase from
+// 'firebase';
 
 class Index extends Component {
 
