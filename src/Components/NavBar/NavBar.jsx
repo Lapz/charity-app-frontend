@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
+import axios from "axios";
 import './css/navBar.css'
 
 class NavBar extends Component {
@@ -22,34 +23,23 @@ class NavBar extends Component {
                         <li>
                             <Link to="/add">Add a new Post</Link>
                         </li>
-                        {(this.state.signindIn === false)
-                            ? (
-                                <li>
-                                    <Link to="/login">Login</Link>
-                                </li>
-                            )
-                            : (
-                                <li>
-                                    <button >Logout</button>
-                                </li>
-                            )}
+
+                        <li>
+                            <Link to="/" onClick={this.logout}>Logout</Link>
+                        </li>
+
                     </ul>
                 </nav>
             </div>
         )
     }
-    // checkIfSingedIn = ()=>{ onClick={this.signUserOut}
-    // firebase.auth().onAuthStateChanged((user) => {   if (user) {     // User is
-    // signed in.     this.setState({         signindIn:true     })   } else { // No
-    // user is signed in.   } }); } signUserOut = ()=>{
-    // firebase.auth().signOut().then( ()=> {         this.setState({
-    // signindIn:false     })   // Sign-out successful. }, (error) => {   // An
-    // error happened.   this.setState({         signindIn:true     }) }); }
 
-    componentDidMount() {
-
-        // this.checkIfSingedIn();
-
+    logout = () => {
+        axios
+            .get("http://localhost:3001/api/logout")
+            .then((response) => {
+                console.log(response)
+            })
     }
 
 }
