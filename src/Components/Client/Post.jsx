@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import axios from "axios"
+import axios from "axios";
+
+import PreviousButton from "./PreviousButton.jsx"
 class Post extends Component {
     constructor() {
         super()
@@ -13,6 +15,8 @@ class Post extends Component {
             ? (
                 <div className="wrapper">
                     <h1>{this.state.title}</h1>
+                    <PreviousButton/>
+
                     <div className="content" dangerouslySetInnerHTML={this.state.body}></div>
                 </div>
             )
