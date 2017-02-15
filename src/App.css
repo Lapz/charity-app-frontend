@@ -18,13 +18,8 @@
     font-size: large;
 }
 
-body {
-    background: #eee;
-    margin: 20px;
-    font-family: tahoma;
-}
 
-.wrapper {
+/*.wrapper {
     width: 80%;
     margin: 0 auto;
     background: #fff;
@@ -33,5 +28,5 @@ body {
     border-radius: 2px;
     box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.2);
     color: #333;
-}
+}*/
 

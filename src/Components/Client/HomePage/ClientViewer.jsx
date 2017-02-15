@@ -16,7 +16,7 @@ class ClientViewer extends Component {
 
     render() {
         return (
-            <div className="wrapper">
+            <div >
 
                 <h1>
                     Created Posts

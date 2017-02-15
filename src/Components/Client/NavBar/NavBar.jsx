@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import axios from "axios";
-import './css/navBar.css'
+import './css/clientNavBar.css'
 
 class NavBar extends Component {
     constructor(props) {
@@ -13,24 +13,32 @@ class NavBar extends Component {
 
     render() {
         return (
-            <div className="nav-wrapper">
-                <nav>
+            <nav className="nav-bar">
+                <nav className="wrapper">
+                    <div className="Logo">
+                        <h1>
+                            Lapz's weird and wonderfull world
+                        </h1>
+                    </div>
+
+                    <label htmlFor="menu-toggle" className="label-toggle"></label>
+
                     <ul>
                         <li>
-                            <Link to="admin/viewPosts">View posts</Link>
+                            <Link to="/">Homepage</Link>
                         </li>
 
                         <li>
-                            <Link to="admin/add">Add a new Post</Link>
+                            <Link to="/about">About</Link>
                         </li>
 
                         <li>
-                            <Link to="/admin" onClick={this.logout}>Logout</Link>
+                            <Link to="/contact">Contact</Link>
                         </li>
 
                     </ul>
                 </nav>
-            </div>
+            </nav>
         )
     }
 
