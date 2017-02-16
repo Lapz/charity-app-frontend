@@ -4,13 +4,18 @@ import {Link} from 'react-router';
 class PostInfo extends Component {
     render() {
         return (
-            <div>
-                <Link to={"/post/" + this.props.id}>
-                    <h1>{this.props.title}</h1>
-                </Link>
+            <article>
+
+                <h1>
+                    <Link to={"/post/" + this.props.id}>
+                        {this.props.title}
+                    </Link>
+                </h1>
+
                 <div className="post-info-body">
-                    {this.props.postSummary}</div>
-            </div>
+                    <p>{this.props.postSummary}</p>
+                </div>
+            </article>
         );
     }
 }

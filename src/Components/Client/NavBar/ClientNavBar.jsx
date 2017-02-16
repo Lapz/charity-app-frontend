@@ -1,29 +1,24 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import axios from "axios";
-import './css/clientNavBar.css'
+import CloseButton from "./CloseButton.jsx";
+import './css/clientNavBar.css';
 
 class NavBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            signindIn: false
+            activeClass: "is-active",
+            hidden: ""
         }
     }
 
     render() {
         return (
-            <nav className="nav-bar">
-                <nav className="wrapper">
-                    <div className="Logo">
-                        <h1>
-                            Lapz's weird and wonderfull world
-                        </h1>
-                    </div>
-
-                    <label htmlFor="menu-toggle" className="label-toggle"></label>
-
+            <div className="nav-wrapper">
+                <nav>
                     <ul>
+
                         <li>
                             <Link to="/">Homepage</Link>
                         </li>
@@ -36,20 +31,22 @@ class NavBar extends Component {
                             <Link to="/contact">Contact</Link>
                         </li>
 
+                        <CloseButton
+                            changeClass={this.changeClass}
+                            activeClass={this.state.activeClass}/>
                     </ul>
+
                 </nav>
-            </nav>
+            </div>
         )
     }
-
-    logout = () => {
-        axios
-            .get("http://localhost:3001/api/logout")
-            .then((response) => {
-                console.log(response)
-            })
+    changeClass = () => {
+        if (this.state.activeClass == "is-active") {
+            this.setState({activeClass: ""})
+        } else {
+            this.setState({activeClass: "is-active", hidden: "hide"})
+        }
     }
-
 }
 
 export default NavBar

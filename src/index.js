@@ -10,6 +10,7 @@ import Login from './Components/Admin/Login/Login.jsx';
 import ClientViewer from "./Components/Client/HomePage/ClientViewer.jsx"
 import Post from "./Components/Client/Posts/Post.jsx"
 import Client from "./Components/Client/HomePage/Client.jsx"
+import Error404 from "./Components/Errors/404.jsx";
 import axios from "axios"
 
 // axios.defaults.headers.common["Authorization"] = this.state.token import
@@ -46,6 +47,8 @@ class Index extends Component {
           <Route component={PostEditor} path={"admin/add"}></Route>
           <Route component={EditPost} path={"admin/edit/:post_id"}></Route>
         </Route>
+
+        <Route component={Error404} path="*"/>
 
       </Router>
 

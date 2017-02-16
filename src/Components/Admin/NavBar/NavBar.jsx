@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import axios from "axios";
-import './css/navBar.css'
+// import './css/navBar.css'
 
 class NavBar extends Component {
     constructor(props) {

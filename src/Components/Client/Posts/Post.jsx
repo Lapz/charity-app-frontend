@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from "axios";
-
+import "./css/post-content.css";
+import "./css/loader.css"
 import PreviousButton from "./PreviousButton.jsx"
 class Post extends Component {
     constructor() {
@@ -13,16 +14,21 @@ class Post extends Component {
     render() {
         return ((this.state.body.__html)
             ? (
-                <div className="wrapper">
+                <div className="post-content-wrapper">
                     <h1>{this.state.title}</h1>
-                    <PreviousButton/>
+                    {/*<PreviousButton/>*/}
 
-                    <div className="content" dangerouslySetInnerHTML={this.state.body}></div>
+                    <div className="post-content" dangerouslySetInnerHTML={this.state.body}></div>
                 </div>
             )
             : (
-                <div className="wrapper">
-                    loading...
+                <div className=" post-loading loader">
+                    <div className="line-scale-party">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
                 </div>
             ));
     }

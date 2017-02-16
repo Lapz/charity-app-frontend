@@ -1,94 +1,57 @@
-.wrapper {
-    margin: 0 auto;
-    max-width: 960px;
-    padding: 0 2%;
+
+.nav-wrapper{
+  min-width: 100%;
+  margin: 0 auto;
 }
 
-.nav-bar {
-    background-color: #fff;
-    position: fixed;
-    min-width: 100%;
+/* menu base styles */
+nav ul button {
+  display: none;
+  visibility: hidden;
+}
+nav{
+  background: #333;
+  color:#fff
 }
 
-.logo {
-    background-color: #fff;
-    border-radius: 50px;
-    display: inline-block;
-    height: 45px;
-    margin: 1em 0;
-    width: 45px;
+nav ul{
+  list-style-type: none;
+  padding: 0;
 }
 
-nav ul {
-    display: flex;
-    justify-content: space-between;
-    list-style-type: none;
-    width: 50%;
+nav a{
+  text-decoration: none;
+  text-align: center;
+  color: #fff;
+  display: block;
+  padding: 10px;
 }
 
-nav ul a {
-    color: #000;
-    text-decoration: none;
-    transition: all .5s ease;
+nav a:hover{
+  background-color: #555;
 }
 
-nav ul a:hover {
-    background-color: #555
-}
+/* social menu base styles */
 
-nav li {
-    display: inline-block;
-}
+/* flex styles */
 
-nav #menu-toggle {
+
+.hide{
     display: none;
 }
 
-nav .label-toggle {
-    display: none;
+@media screen and (min-width: 768px){
+
+nav ul{
+  display: flex;
+  justify-content: flex-start;
 }
 
-nav .wrapper {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
+nav li{
+  flex: 1 1 0;
 }
 
-@media screen and (max-width: 768px) {
-    ul {
-        background-color: lightblue;
-        display: block;
-        height: 0;
-        list-style-type: none;
-        opacity: 0;
-        text-align: center;
-        transition: all 1s ease;
-        width: 100%;
-        visibility: hidden;
-    }
-    li {
-        border-bottom: 2px solid lightgreen;
-        color: #fff;
-        display: block;
-        font-size: 1.5em;
-        padding: 2em 0;
-    }
-    #menu-toggle:checked~ul {
-        opacity: 1;
-        height: 100vh;
-        visibility: visible;
-    }
-    .label-toggle {
-        background: linear-gradient(to bottom cadetblue 0%, lightblue 20%,silver 20%, transparent 20%, transparent 20%, transparent 60%);
-        cursor: pointer;
-        display: block;
-        float: right;
-        height: 35px;
-        margin-top: 1em;
-        width: 35px;
-    }
-    .wrapper {
-        display: block;
-    }
-}
 
+
+    
+} /* end media 768 */

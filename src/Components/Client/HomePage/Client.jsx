@@ -1,19 +1,14 @@
 import React, {Component} from 'react';
-import NavBar from "../NavBar/NavBar.jsx"
+import NavBar from "../NavBar/ClientNavBar.jsx"
 import Footer from "./Footer.jsx";
-import "./css/header.css";
-import "./css/content.css";
 
 class Client extends Component {
     render() {
         return (
             <div>
 
-                <NavBar/>
+                <NavBar/> {this.props.children}
 
-                <div className="content-wrapper">
-                    {this.props.children}
-                </div>
                 <Footer/>
             </div>
         );
