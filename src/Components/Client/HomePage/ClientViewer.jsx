@@ -49,7 +49,7 @@ class ClientViewer extends Component {
 
     componentDidMount() {
         axios
-            .get("http://localhost:3001/posts/")
+            .get("posts/")
             .then((response) => {
                 console.log(response)
                 this.setState({posts: response.data})

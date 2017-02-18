@@ -21,6 +21,12 @@ class NavBar extends Component {
                         </li>
 
                         <li>
+                            <Link to="admin/about">
+                                About Page
+                            </Link>
+                        </li>
+
+                        <li>
                             <Link to="admin/add">Add a new Post</Link>
                         </li>
 
@@ -36,7 +42,7 @@ class NavBar extends Component {
 
     logout = () => {
         axios
-            .get("http://localhost:3001/api/logout")
+            .get("api/logout")
             .then((response) => {
                 console.log(response)
             })

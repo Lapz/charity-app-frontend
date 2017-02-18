@@ -21,7 +21,7 @@ class EditEditor extends Component {
 
     componentDidMount() {
         axios
-            .get(`http://localhost:3001/api/posts/${this.props.post_id}`)
+            .get(`api/posts/${this.props.post_id}`)
             .then((response) => {
                 console.log(response)
 
@@ -48,7 +48,7 @@ class EditEditor extends Component {
 
         console.log(JSON.stringify(marked(this.state.textValue)))
 
-        axios.put(`http://localhost:3001/api/posts/${this.props.post_id}`, {
+        axios.put(`api/posts/${this.props.post_id}`, {
             title: this.state.title,
             body: this.state.textValue,
             html: marked(this.state.textValue)

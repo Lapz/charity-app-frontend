@@ -1,24 +1,23 @@
 import React, {Component} from 'react';
-import axios from "axios";
-import "./css/post-content.css";
-import "./css/loader.css"
-import PreviousButton from "./PreviousButton.jsx"
-class Post extends Component {
+import "./css/about.css";
+import "./css/loader.css";
+import axios from "axios"
+class About extends Component {
     constructor() {
         super()
         this.state = {
-            body: {},
-            title: ""
+            body: {}
         }
     }
     render() {
+
         return ((this.state.body.__html)
             ? (
-                <div className="post-content-wrapper">
+                <div className="about-content-wrapper">
                     <h1>{this.state.title}</h1>
                     {/*<PreviousButton/>*/}
 
-                    <div className="post-content" dangerouslySetInnerHTML={this.state.body}></div>
+                    <div className="about-content" dangerouslySetInnerHTML={this.state.body}></div>
                 </div>
             )
             : (
@@ -34,21 +33,20 @@ class Post extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.params.post_id)
         axios
-            .get(`posts/${this.props.params.post_id}`)
+            .get("about")
             .then((response) => {
                 console.log(response)
 
                 this.setState({
                     body: {
                         __html: response.data.html
-                    },
-                    title: response.data.title
+                    }
+
                 })
             })
     }
 
 }
 
-export default Post; //dangerouslySetInnerHTML={this.state.body
+export default About;

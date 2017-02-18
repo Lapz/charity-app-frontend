@@ -11,6 +11,10 @@ import ClientViewer from "./Components/Client/HomePage/ClientViewer.jsx"
 import Post from "./Components/Client/Posts/Post.jsx"
 import Client from "./Components/Client/HomePage/Client.jsx"
 import Error404 from "./Components/Errors/404.jsx";
+
+import AdminAbout from "./Components/Admin/About/About.jsx";
+
+import ClientAbout from "./Components/Client/About/About.jsx"
 import axios from "axios"
 
 // axios.defaults.headers.common["Authorization"] = this.state.token import
@@ -19,7 +23,7 @@ import axios from "axios"
 // import Favourite from './Components/Admin/Favourites/Favourites.jsx'; import
 // Login from './Components/Admin/Login/Login.jsx'; import * as firebase from
 // 'firebase';
-
+axios.defaults.baseURL = "http://localhost:3001/"
 class Index extends Component {
 
   constructor() {
@@ -29,14 +33,17 @@ class Index extends Component {
       token: ""
     }
   }
+
   render() {
     return (
+
       <Router history={browserHistory}>
         <Route
           component={(props) => <Login passUpToken={this.getToken}/>}
           path="/admin"></Route>
 
         <Route component={Client}>
+          <Route component={ClientAbout} path="/about"></Route>
           <Route component={ClientViewer} path="/"></Route>
           <Route component={Post} path="/post/:post_id"></Route>
         </Route>
@@ -46,6 +53,8 @@ class Index extends Component {
           <Route component={ViewPost} path="admin/viewPosts"></Route>
           <Route component={PostEditor} path={"admin/add"}></Route>
           <Route component={EditPost} path={"admin/edit/:post_id"}></Route>
+
+          <Route component={AdminAbout} path ={"admin/about"}></Route>
         </Route>
 
         <Route component={Error404} path="*"/>
@@ -60,7 +69,7 @@ class Index extends Component {
     if (this.state.token.length > 3) {
       axios({
         method: "GET",
-        url: "http://localhost:3001/api/ping",
+        url: "api/ping",
         headers: {
           'Content-Type': "application/x-www-form-urlencoded; charset=UTF-8",
           "Authorization": this.state.token

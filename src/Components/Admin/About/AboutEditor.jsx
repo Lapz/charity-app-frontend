@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import "./css/Editor.css"
+// import "./css/Editor.css"
 import SaveButton from "./SaveButton.jsx";
 import axios from "axios";
-import PostTitle from "./PostTitle.jsx"
+
 const SimpleMDE = require("react-simplemde-editor");
 const marked = require("marked");
 
 marked.setOptions({sanitize: true})
 
-class PostEditor extends Component {
+class AboutEditor extends Component {
 
     constructor() {
         super()
@@ -17,11 +17,23 @@ class PostEditor extends Component {
             title: ""
         }
     }
+
+    componentDidMount() {
+        axios
+            .get(`api/about/`)
+            .then((response) => {
+                console.log(response)
+
+                this.setState({savedState: response.data.body})
+            })
+    }
     render() {
         return (
             <div className="wrapper">
-                <PostTitle changeTitleState={this.changeTitle}/>
-                <SimpleMDE value={this.state.textValue} onChange={this.handleChange}/>
+                {/*<PostTitle changeTitleState={this.changeTitle}/>*/}
+                <SimpleMDE
+                    value={this.state.savedState || this.state.textValue}
+                    onChange={this.handleChange}/>
                 <SaveButton getEditorContent={this.convertMDToHtml}/>
             </div>
         );
@@ -36,8 +48,8 @@ class PostEditor extends Component {
 
         console.log(JSON.stringify(marked(this.state.textValue)))
 
-        axios.post("api/posts", {
-            title: this.state.title,
+        axios.put("api/about", {
+            title: "About",
             body: this.state.textValue,
             html: marked(this.state.textValue)
         })
@@ -47,4 +59,4 @@ class PostEditor extends Component {
     }
 }
 
-export default PostEditor;
+export default AboutEditor;

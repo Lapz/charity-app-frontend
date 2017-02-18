@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import EditEditor from './EditEditor.jsx';
-import axios from 'axios';
+
 class EditPost extends Component {
 
     constructor() {

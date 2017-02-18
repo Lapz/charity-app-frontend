@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -40,8 +41,8 @@ div.rgb {
 
 }
 
-div#red {
-  background-color: red;
+div#blue-green {
+  background-color: #00A996;
   z-index: 2;
   animation-name: colorify;
   animation-duration: 10s;
@@ -49,17 +50,17 @@ div#red {
   animation-iteration-count: infinite;
 }
 
-div#green {
-  background-color: green;
+div#light-blue {
+  background-color: #74a1bf;
   z-index: 1;
   animation-name: colorify;
-  animation-duration: 15s;
+  animation-duration: 15;
   animation-delay: 2s;
   animation-iteration-count: infinite;
 }
 
-div#blue {
-  background-color: blue;
+div#dark-blue {
+  background-color: #00658F;
   z-index: 0;
   animation-name: colorify;
   animation-duration: 20s;

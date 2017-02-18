@@ -52,7 +52,7 @@ class NormalLogin extends Component {
         const pass = this.refs.userPassword.value;
 
         axios
-            .post("http://localhost:3001/auth/authenticate", {
+            .post("auth/authenticate", {
             username: email,
             password: pass
         })
