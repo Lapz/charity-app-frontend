@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import PostInfo from './PostInfo';
 import "./css/content.css";
+import "./css/loader.css";
 const removeMd = require("remove-markdown");
 
 const marked = require("marked");
@@ -22,7 +23,7 @@ class ClientViewer extends Component {
                     Created Posts
                 </h1>*/}
                 <section id="blocks">
-                    {(this.state.posts)
+                    {(this.state.posts.length > 0)
                         ? (this.state.posts.map((postItem, index) => {
 
                             let postItemSummary = null || removeMd(postItem.body).split(" ")
@@ -41,7 +42,14 @@ class ClientViewer extends Component {
                                 id={postItem._id}
                                 key={index}/>)
                         }))
-                        : null}
+                        : <div className=" post-loading loader">
+                            <div className="line-scale-party">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>}
                 </section>
             </div>
         );

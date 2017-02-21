@@ -23,7 +23,7 @@ import axios from "axios"
 // import Favourite from './Components/Admin/Favourites/Favourites.jsx'; import
 // Login from './Components/Admin/Login/Login.jsx'; import * as firebase from
 // 'firebase';
-axios.defaults.baseURL = "http://localhost:3001/"
+axios.defaults.baseURL = "https://charity-dnd-api.herokuapp.com/"
 class Index extends Component {
 
   constructor() {
