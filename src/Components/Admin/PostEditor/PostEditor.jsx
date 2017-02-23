@@ -36,7 +36,7 @@ class PostEditor extends Component {
 
         console.log(JSON.stringify(marked(this.state.textValue)))
 
-        axios.post("http://localhost:3001/api/posts", {
+        axios.post("api/posts", {
             title: this.state.title,
             body: this.state.textValue,
             html: marked(this.state.textValue)

@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import PostInfo from './PostInfo';
-import {convertFromRaw} from 'draft-js';
-
 const removeMd = require("remove-markdown")
 const marked = require("marked");
 class ViewPost extends Component {
@@ -41,7 +39,7 @@ class ViewPost extends Component {
 
     componentDidMount() {
         axios
-            .get("http://localhost:3001/api/posts", {withCredentials: true})
+            .get("api/posts", {withCredentials: true})
             .then((response) => {
                 console.log(response)
 

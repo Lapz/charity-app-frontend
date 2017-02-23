@@ -3,18 +3,27 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import {Router, Route, browserHistory, withRouter} from 'react-router';
-import ViewPost from './Components/ViewPosts/ViewPost.jsx';
-import EditPost from './Components/EditPost/EditPost.jsx';
-import PostEditor from './Components/PostEditor/PostEditor.jsx';
-import Login from './Components/Login/Login.jsx'
+import ViewPost from './Components/Admin/ViewPosts/ViewPost.jsx';
+import EditPost from './Components/Admin/EditPost/EditPost.jsx';
+import PostEditor from './Components/Admin/PostEditor/PostEditor.jsx';
+import Login from './Components/Admin/Login/Login.jsx';
+import ClientViewer from "./Components/Client/HomePage/ClientViewer.jsx"
+import Post from "./Components/Client/Posts/Post.jsx"
+import Client from "./Components/Client/HomePage/Client.jsx"
+import Error404 from "./Components/Errors/404.jsx";
+
+import AdminAbout from "./Components/Admin/About/About.jsx";
+
+import ClientAbout from "./Components/Client/About/About.jsx"
 import axios from "axios"
 
 // axios.defaults.headers.common["Authorization"] = this.state.token import
-// StationSearch from './Components/StationSearch/StationSearch.jsx'; import
-// LineStatus from './Components/LineStatus/LineItemContainer.jsx'; import
-// Favourite from './Components/Favourites/Favourites.jsx'; import Login from
-// './Components/Login/Login.jsx'; import * as firebase from 'firebase';
-
+// StationSearch from './Components/Admin/StationSearch/StationSearch.jsx';
+// import LineStatus from './Components/Admin/LineStatus/LineItemContainer.jsx';
+// import Favourite from './Components/Admin/Favourites/Favourites.jsx'; import
+// Login from './Components/Admin/Login/Login.jsx'; import * as firebase from
+// 'firebase';
+axios.defaults.baseURL = "https://charity-dnd-api.herokuapp.com/"
 class Index extends Component {
 
   constructor() {
@@ -24,15 +33,31 @@ class Index extends Component {
       token: ""
     }
   }
+
   render() {
     return (
+
       <Router history={browserHistory}>
-        <Route component={(props) => <Login passUpToken={this.getToken}/>} path="/"></Route>
-        <Route component={App} onEnter={this.checkIfAuth}>
-          <Route component={ViewPost} path="/viewPosts"></Route>
-          <Route component={PostEditor} path={"/add"}></Route>
-          <Route component={EditPost} path={"/edit/:post_id"}></Route>
+        <Route
+          component={(props) => <Login passUpToken={this.getToken}/>}
+          path="/admin"></Route>
+
+        <Route component={Client}>
+          <Route component={ClientAbout} path="/about"></Route>
+          <Route component={ClientViewer} path="/"></Route>
+          <Route component={Post} path="/post/:post_id"></Route>
         </Route>
+
+        <Route component={App} onEnter={this.checkIfAuth}>
+
+          <Route component={ViewPost} path="admin/viewPosts"></Route>
+          <Route component={PostEditor} path={"admin/add"}></Route>
+          <Route component={EditPost} path={"admin/edit/:post_id"}></Route>
+
+          <Route component={AdminAbout} path ={"admin/about"}></Route>
+        </Route>
+
+        <Route component={Error404} path="*"/>
 
       </Router>
 
@@ -41,12 +66,10 @@ class Index extends Component {
 
   checkIfAuth = () => {
 
-    console.log(this.state.token)
-
     if (this.state.token.length > 3) {
       axios({
         method: "GET",
-        url: "http://localhost:3001/api/ping",
+        url: "api/ping",
         headers: {
           'Content-Type': "application/x-www-form-urlencoded; charset=UTF-8",
           "Authorization": this.state.token

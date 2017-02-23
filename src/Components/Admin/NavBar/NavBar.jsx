@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import axios from "axios";
-import './css/navBar.css'
+// import './css/navBar.css'
 
 class NavBar extends Component {
     constructor(props) {
@@ -13,19 +13,25 @@ class NavBar extends Component {
 
     render() {
         return (
-            <div className="wrapper">
+            <div className="nav-wrapper">
                 <nav>
                     <ul>
                         <li>
-                            <Link to="/viewPosts">View posts</Link>
+                            <Link to="admin/viewPosts">View posts</Link>
                         </li>
 
                         <li>
-                            <Link to="/add">Add a new Post</Link>
+                            <Link to="admin/about">
+                                About Page
+                            </Link>
                         </li>
 
                         <li>
-                            <Link to="/" onClick={this.logout}>Logout</Link>
+                            <Link to="admin/add">Add a new Post</Link>
+                        </li>
+
+                        <li>
+                            <Link to="/admin" onClick={this.logout}>Logout</Link>
                         </li>
 
                     </ul>
@@ -36,7 +42,7 @@ class NavBar extends Component {
 
     logout = () => {
         axios
-            .get("http://localhost:3001/api/logout")
+            .get("api/logout")
             .then((response) => {
                 console.log(response)
             })

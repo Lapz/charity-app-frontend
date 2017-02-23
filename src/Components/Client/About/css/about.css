@@ -1,0 +1,30 @@
+div h1 {
+  text-align: center
+}
+
+.about-content-wrapper {
+  background: #fff;
+  min-height: 100%
+}
+
+.line-scale-party> div {
+  background-color:blue !important ;
+}
+.about-loading {
+  display: flex;
+  justify-content: center;
+  align-items: cente
+}
+
+.about-content {
+  background: #fff;
+  margin-bottom: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.about-content h1 {
+  text-align: center;
+  font-size: 20px;
+  margin: 10px 0;
+}
