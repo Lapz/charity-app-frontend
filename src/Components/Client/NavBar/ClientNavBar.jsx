@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 import axios from "axios";
 import CloseButton from "./CloseButton.jsx";
-import './css/clientNavBar.css';
 
 class NavBar extends Component {
     constructor(props) {
@@ -15,26 +14,29 @@ class NavBar extends Component {
 
     render() {
         return (
-            <div className="nav-wrapper">
-                <nav>
-                    <ul>
+            <div>
+                <nav className="nav">
 
-                        <li>
-                            <Link to="/">Homepage</Link>
-                        </li>
+                    <div className="nav-left">
+                        <a className="nav-item">
+                            Doctors in Diaspora
+                        </a>
+                    </div>
 
-                        <li>
-                            <Link to="/about">About</Link>
-                        </li>
+                    <span onClick={this.changeClass} className="nav-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
 
-                        <li>
-                            <Link to="/contact">Contact</Link>
-                        </li>
+                    <div className={`nav-right nav-menu ${this.state.activeClass}`}>
 
-                        <CloseButton
-                            changeClass={this.changeClass}
-                            activeClass={this.state.activeClass}/>
-                    </ul>
+                        <Link className="nav-item" to="/">Homepage</Link>
+
+                        <Link className="nav-item" to="/about">About</Link>
+
+                        <Link className="nav-item" to="/contact">Contact</Link>
+                    </div>
 
                 </nav>
             </div>

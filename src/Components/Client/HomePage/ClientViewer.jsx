@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import PostInfo from './PostInfo';
-import "./css/content.css";
 import "./css/loader.css";
 const removeMd = require("remove-markdown");
 
@@ -17,40 +16,43 @@ class ClientViewer extends Component {
 
     render() {
         return (
-            <div className="content-wrapper">
+            <div className="columns">
+                <div className="column is-half is-offset-one-quarter">
+                    <div className="content">
 
-                {/*<h1>
+                        {/*<h1>
                     Created Posts
                 </h1>*/}
-                <section id="blocks">
-                    {(this.state.posts.length > 0)
-                        ? (this.state.posts.map((postItem, index) => {
+                        <section id="blocks">
+                            {(this.state.posts.length > 0)
+                                ? (this.state.posts.map((postItem, index) => {
 
-                            let postItemSummary = null || removeMd(postItem.body).split(" ")
+                                    let postItemSummary = null || removeMd(postItem.body).split(" ")
 
-                            if (postItemSummary.length > 15) {
-                                postItemSummary = postItemSummary
-                                    .slice(0, postItemSummary.length / 2)
-                                    .join(" ")
-                            }
+                                    if (postItemSummary.length > 15) {
+                                        postItemSummary = postItemSummary
+                                            .slice(0, postItemSummary.length / 2)
+                                            .join(" ")
+                                    }
 
-                            return (<PostInfo
-                                title={postItem.title}
-                                postSummary={postItemSummary}
-                                body
-                                ={postItem.html}
-                                id={postItem._id}
-                                key={index}/>)
-                        }))
-                        : <div className=" post-loading loader">
-                            <div className="line-scale-party">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>}
-                </section>
+                                    return (<PostInfo
+                                        title={postItem.title}
+                                        postSummary={postItemSummary}
+                                        body
+                                        ={postItem.html}
+                                        id={postItem._id}
+                                        key={index}/>)
+                                }))
+
+                                : <div className="columuns">
+                                    <div className="column is-half is-offset-one-quarter">
+
+                                        Loading ...
+                                    </div>
+                                </div>}
+                        </section>
+                    </div>
+                </div>
             </div>
         );
     }

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import axios from "axios";
-import "./css/post-content.css";
 import "./css/loader.css"
 import PreviousButton from "./PreviousButton.jsx"
 class Post extends Component {
@@ -14,23 +13,19 @@ class Post extends Component {
     render() {
         return ((this.state.body.__html)
             ? (
-                <div className="post-content-wrapper">
-                    <h1>{this.state.title}</h1>
-                    {/*<PreviousButton/>*/}
 
-                    <div className="post-content" dangerouslySetInnerHTML={this.state.body}></div>
-                </div>
-            )
-            : (
-                <div className=" post-loading loader">
-                    <div className="line-scale-party">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                <div className="columns">
+                    <div className="column is-5 is-offset-one-quarter">
+                        <div className="content">
+                            <h1>{this.state.title}</h1>
+                            {/*<PreviousButton/>*/}
+
+                            <div dangerouslySetInnerHTML={this.state.body}></div>
+                        </div>
                     </div>
                 </div>
-            ));
+            )
+            : (null));
     }
 
     componentDidMount() {

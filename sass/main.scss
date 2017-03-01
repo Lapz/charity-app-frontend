@@ -1,0 +1,20 @@
+
+$background-color: lightblue;
+$main-color: lightgrey;
+@import "../node_modules/bulma/bulma.sass";
+
+@import "../node_modules/bulma/sass/components/nav.sass";
+
+
+.nav {
+  background-color: $background-color
+}
+
+
+.content {
+  background-color: #c0e8e3;
+}
+
+article{
+  border: thick 2px #00658f;
+}
