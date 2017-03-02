@@ -1,7 +1,16 @@
 import React, {Component} from 'react';
-// const bulma = require("bulma");
+
+import ContactField from "./ContactField";
+import ContactButton from "./ContactButton";
+import ContactTextArea from "./ContactTextArea";
 
 class Contact extends Component {
+
+    constructor() {
+        super()
+
+        this.state = {}
+    }
     render() {
         return (
 
@@ -9,27 +18,25 @@ class Contact extends Component {
                 <div className="column is-half is-offset-one-quarter">
 
                     <form>
-                        <label className="label">Name</label>
-                        <p className="control">
-                            <input className="input" type="text" placeholder="John Applseed"/>
 
-                        </p>
+                        <ContactField
+                            identifier="Name"
+                            labelName="Name"
+                            placeholder="John ApplesSeed"
+                            handleFieldChange={this.handleFieldChange}/>
 
-                        <label className="class">Email</label>
-                        <p className="control">
-                            <input className="input" type="text" placeholder="John.Applseed@example.com"/>
-                        </p>
-                        <label className="label">Message</label>
-                        <p className="control">
-                            <textarea className="textarea" placeholder="Textarea"></textarea>
-                        </p>
+                        <ContactField
+                            identifier="Email"
+                            labelName="Email"
+                            placeholder="JohnApplesSeed@example.com"
+                            handleFieldChange={this.handleFieldChange}/>
 
-                        <div className="control">
-                            <p className="control">
-                                <button className="button is-primary">Submit</button>
-                            </p>
+                        <ContactTextArea
+                            identifier="Message"
+                            labelName="Message"
+                            handleTextAreaChange={this.handleTextAreaChange}/>
 
-                        </div>
+                        <ContactButton buttonText="Submit" handleSumbit={this.handelSubmit}/>
 
                     </form>
                 </div>
@@ -37,6 +44,28 @@ class Contact extends Component {
 
         );
     }
+
+    handleFieldChange = (value, fieldID) => {
+        console.log(value, fieldID)
+
+        const obj = this.state;
+
+        const newState = Object.assign({}, obj, {[fieldID]: value})
+
+        this.setState(newState)
+    }
+
+    handleSumbit = () => {
+
+        console.log("Clicked");
+    }
+
+    handleTextAreaChange = (value, fieldID) => {
+        const obj = this.state;
+        const newState = Object.assign({}, obj, {[fieldID]: value})
+        this.setState(newState)
+    }
+
 }
 
 // bulma()(Contact)
