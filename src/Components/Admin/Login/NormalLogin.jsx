@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 // import * as firebase from 'firebase';
-import './css/normalLogin.css';
+import ContactField from "./EmailField.jsx";
 import {browserHistory} from 'react-router';
 import axios from "axios"
 class NormalLogin extends Component {
@@ -15,32 +15,14 @@ class NormalLogin extends Component {
     }
     render() {
         return (
-            <div className="container">
-                <form className="form-wrapper">
-                    <ul className="flex-outer">
-                        <li>
-                            <label htmlFor="txtEmail">
-                                Email</label>
-                            <input id="txtEmail" type="email" placeholder="Email" ref="userEmail" required/>
-                        </li>
+            <div className="columns">
+                <form onSubmit={this.login}>
 
-                        <li>
-                            <label htmlFor="txtPassword">Password</label>
-                            <input
-                                id="txtPassword"
-                                type="password"
-                                placeholder="Password"
-                                ref="userPassword"/>
-                        </li>
-
-                        <li>
-                            <button id="loginBtn" className="login-btn" onClick={this.login}>Login</button>
-                        </li>
-
-                        {/* <li>
-                <button id="signUpBtn" className="signUp-btn" onClick={this.signup}>Sign Up</button>
-            </li>*/}
-                    </ul>
+                    <ContactField
+                        identifier="Email"
+                        placeholder="JohnAppleSeed@example.com"
+                        lableName="Emai"/>
+                    <ContactField lableName="password"/>
                 </form>
             </div>
         )

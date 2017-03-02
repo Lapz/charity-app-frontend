@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class ContactButton extends Component {
+class EmailButton extends Component {
     render() {
         return (
 
@@ -18,4 +18,4 @@ class ContactButton extends Component {
     }
 }
 
-export default ContactButton;
+export default EmailButton;

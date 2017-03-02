@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import NormalLogin from './NormalLogin.jsx';
-// import SignUp from'./SignUp.jsx';
+
+import EmailField from "./EmailField.jsx";
+import EmailButton from "./EmailButton.jsx";
 import ErrorModal from './ErrorModal.jsx';
-import './css/login.css';
+import {browserHistory} from 'react-router';
+import axios from "axios";
 
 class Login extends Component {
 
@@ -15,19 +18,28 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="wrapper login-wrapper">
-                {(this.state.error === true)
-                    ? (<ErrorModal
-                        modalClosedButtonPressed={this.modalClosedButtonPressed}
-                        errorMessage={this.state.errorMessage}/>)
-                    : null}
 
-                <div className='login'>
-                    <NormalLogin
-                        onReceiveToken={this.onReceiveToken}
-                        errorModalTrigger={this.errorModalTrigger}/>
+            <div className="columns">
+                <div className="column is-half is-offset-one-quarter">
+                    {(this.state.error === true)
+                        ? (<ErrorModal
+                            modalClosedButtonPressed={this.modalClosedButtonPressed}
+                            errorMessage={this.state.errorMessage}/>)
+                        : null}
+
+                    <form onSubmit={this.login}>
+
+                        <EmailField
+                            identifier="Email"
+                            placeholder="JohnAppleSeed@example.com"
+                            labelName="Email"/>
+
+                        <EmailField identifier="Password" labelName="Password" placeholder="******"/>
+
+                        <EmailButton buttonText="Login"/>
+                    </form>
+
                 </div>
-
             </div>
         );
     }
@@ -43,9 +55,38 @@ class Login extends Component {
     onReceiveToken = (token) => {
         console.log(token + "    2")
 
-        this
-            .props
-            .passUpToken(token)
+        this.passUpToken(token)
+    }
+
+    login = (e) => {
+        e.preventDefault()
+        const email = this.refs.Email.value;
+        const pass = this.refs.Password.value;
+
+        axios
+            .post("auth/authenticate", {
+            username: email,
+            password: pass
+        })
+            .then((response) => {
+                if (response.data.success == true) {
+                    this.passUpJWT(response.data.token)
+                    browserHistory.push("admin/add")
+                } else {
+                    // console.log(response)
+                    this.errorModalTrigger(response.data.msg)
+                }
+
+            })
+            .catch((err) => {
+
+                console.log(err)
+                this.errorModalTrigger(e.message)
+            })
+    }
+
+    passUpJWT = (token) => {
+        this.onReceiveToken(token)
     }
 }
 

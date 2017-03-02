@@ -10,7 +10,7 @@ class ContactTextArea extends Component {
                         className="textarea"
                         ref={`${this.props.labelName}`}
                         onChange={this.handleChange}
-                        placeholder="Textarea"></textarea>
+                        placeholder={this.props.placeholder}></textarea>
                 </p>
             </div>
         );

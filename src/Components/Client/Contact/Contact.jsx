@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from "axios";
 
 import ContactField from "./ContactField";
 import ContactButton from "./ContactButton";
@@ -14,27 +15,28 @@ class Contact extends Component {
     render() {
         return (
 
-            <div className="columns is-mobile">
+            <div className="columns">
                 <div className="column is-half is-offset-one-quarter">
 
-                    <form>
+                    <form onSubmit={this.handleSumbit}>
 
                         <ContactField
                             identifier="Name"
                             labelName="Name"
-                            placeholder="John ApplesSeed"
+                            placeholder="John AppleSeed"
                             handleFieldChange={this.handleFieldChange}/>
 
                         <ContactField
                             identifier="Email"
                             labelName="Email"
-                            placeholder="JohnApplesSeed@example.com"
+                            placeholder="JohnAppleSeed@example.com"
                             handleFieldChange={this.handleFieldChange}/>
 
                         <ContactTextArea
                             identifier="Message"
                             labelName="Message"
-                            handleTextAreaChange={this.handleTextAreaChange}/>
+                            handleTextAreaChange={this.handleTextAreaChange}
+                            placeholder="Enter your message"/>
 
                         <ContactButton buttonText="Submit" handleSumbit={this.handelSubmit}/>
 
@@ -55,9 +57,24 @@ class Contact extends Component {
         this.setState(newState)
     }
 
-    handleSumbit = () => {
+    handleSumbit = (e) => {
+        e.preventDefault()
 
-        console.log("Clicked");
+        axios
+            .post("contact", {
+            author: this.state.Name,
+            email: this.state.Email
+
+        })
+            .then((response) => {
+                console.log(response)
+
+                if (response.data.success === true) {
+                    //trigerr model
+                } else {
+                    // trigerr errorModel
+                }
+            })
     }
 
     handleTextAreaChange = (value, fieldID) => {

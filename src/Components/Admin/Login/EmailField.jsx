@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class EmailField extends Component {
+class ContactField extends Component {
     render() {
         return (
             <div>
@@ -30,4 +30,4 @@ class EmailField extends Component {
     }
 }
 
-export default EmailField;
+export default ContactField;
