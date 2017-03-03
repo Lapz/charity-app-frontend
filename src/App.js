@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 
-import './App.css';
-
 import NavBar from './Components/Admin/NavBar/NavBar.jsx';
 
 class App extends Component {

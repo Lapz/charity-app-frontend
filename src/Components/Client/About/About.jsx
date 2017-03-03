@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import "./css/loader.css";
+
 import axios from "axios"
 class About extends Component {
     constructor() {

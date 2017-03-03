@@ -12,13 +12,19 @@ class EditPost extends Component {
 
     render() {
         return (
-            <div>
-                <EditEditor
-                    savedState
-                    ={this.state.savedState}
-                    post_id
-                    ={this.props.params.post_id}
-                    post_title={this.state.title}/>
+            <div className="columns">
+                <div className="column is-half is-offset-one-quarter">
+
+                    <h1 className="title">
+                        Edit a post
+                    </h1>
+                    <EditEditor
+                        savedState
+                        ={this.state.savedState}
+                        post_id
+                        ={this.props.params.post_id}
+                        post_title={this.state.title}/>
+                </div>
             </div>
         );
     }

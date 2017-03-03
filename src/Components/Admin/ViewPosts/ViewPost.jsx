@@ -16,23 +16,23 @@ class ViewPost extends Component {
 
     render() {
         return (
-            <div className="wrapper">
+            <div className="columns">
+                <div className="column is-half is-offset-one-quarter">
 
-                <h1>
-                    Created Posts
-                </h1>
+                    <h1 className="title">Created Posts</h1>
 
-                {(this.state.posts)
-                    ? (this.state.posts.map((postItem, index) => {
+                    {(this.state.posts)
+                        ? (this.state.posts.map((postItem, index) => {
 
-                        const postItemSummary = null || removeMd(postItem.body)
+                            const postItemSummary = null || removeMd(postItem.body)
 
-                        return (<PostInfo
-                            title={postItem.title}
-                            postSummary={postItemSummary}
-                            id={postItem._id}key={index}/>)
-                    }))
-                    : null}
+                            return (<PostInfo
+                                title={postItem.title}
+                                postSummary={postItemSummary}
+                                id={postItem._id}key={index}/>)
+                        }))
+                        : null}
+                </div>
             </div>
         );
     }

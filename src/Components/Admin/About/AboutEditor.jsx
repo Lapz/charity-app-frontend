@@ -29,7 +29,8 @@ class AboutEditor extends Component {
     }
     render() {
         return (
-            <div className="wrapper">
+            <div>
+
                 {/*<PostTitle changeTitleState={this.changeTitle}/>*/}
                 <SimpleMDE
                     value={this.state.savedState || this.state.textValue}

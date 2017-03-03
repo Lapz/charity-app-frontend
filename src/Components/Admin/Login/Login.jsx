@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import NormalLogin from './NormalLogin.jsx';
-
 import EmailField from "./EmailField.jsx";
 import EmailButton from "./EmailButton.jsx";
-import ErrorModal from './ErrorModal.jsx';
+
+// import LoginModal from "./ErrorModal.jsx"
+
+import Modal from "./Modal.jsx";
 import {browserHistory} from 'react-router';
 import axios from "axios";
 
@@ -12,7 +13,9 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            error: false
+            message: "",
+            modalTrigered: false,
+            loggedIn: false
         }
     }
 
@@ -21,22 +24,33 @@ class Login extends Component {
 
             <div className="columns">
                 <div className="column is-half is-offset-one-quarter">
-                    {(this.state.error === true)
-                        ? (<ErrorModal
-                            modalClosedButtonPressed={this.modalClosedButtonPressed}
-                            errorMessage={this.state.errorMessage}/>)
+                    {(this.state.modalTrigered === true)
+                        ? (
+                            <Modal
+                                handleClose={this.triggerModal}
+                                message={this.state.message}
+                                isActive={this.state.modelTrigered}
+                                handleClose={this.triggerModal}></Modal>
+                        )
                         : null}
 
                     <form onSubmit={this.login}>
 
                         <EmailField
-                            identifier="Email"
+                            type="email"
+                            identifier="email"
                             placeholder="JohnAppleSeed@example.com"
-                            labelName="Email"/>
+                            labelName="Email"
+                            handleFieldChange={this.handleFieldChange}/>
 
-                        <EmailField type="password" identifier="Password" labelName="Password" placeholder="******"/>
+                        <EmailField
+                            type="password"
+                            identifier="password"
+                            labelName="Password"
+                            placeholder="******"
+                            handleFieldChange={this.handleFieldChange}/>
 
-                        <EmailButton buttonText="Login"/>
+                        <EmailButton type="submit" buttonText="Login"/>
                     </form>
 
                 </div>
@@ -48,20 +62,28 @@ class Login extends Component {
         this.setState({error: false})
     }
 
-    errorModalTrigger = (errorMessage) => {
-        this.setState({error: true, errorMessage: errorMessage})
+    triggerModal = (modalMessage) => {
+
+        const modelTrigger = !this.state.modalTrigered;
+
+        this.setState({modalTrigered: modelTrigger, message: modalMessage})
     }
 
-    onReceiveToken = (token) => {
-        console.log(token + "    2")
+    handleFieldChange = (value, fieldID) => {
+        console.log(value, fieldID)
 
-        this.passUpToken(token)
+        const obj = this.state;
+
+        const newState = Object.assign({}, obj, {[fieldID]: value})
+
+        this.setState(newState)
     }
 
     login = (e) => {
         e.preventDefault()
-        const email = this.refs.Email.value;
-        const pass = this.refs.Password.value;
+
+        const email = this.state.email;
+        const pass = this.state.password;
 
         axios
             .post("auth/authenticate", {
@@ -70,24 +92,25 @@ class Login extends Component {
         })
             .then((response) => {
                 if (response.data.success == true) {
-                    this.passUpJWT(response.data.token)
-                    browserHistory.push("admin/add")
+                    this
+                        .props
+                        .passUpToken(response.data.token)
+
+                    browserHistory.replace("/admin/add")
                 } else {
                     // console.log(response)
-                    this.errorModalTrigger(response.data.msg)
+                    this.triggerModal(response.data.msg)
                 }
 
             })
             .catch((err) => {
 
                 console.log(err)
-                this.errorModalTrigger(e.message)
+                this.triggerModal(e.message)
             })
+
     }
 
-    passUpJWT = (token) => {
-        this.onReceiveToken(token)
-    }
 }
 
 export default Login;

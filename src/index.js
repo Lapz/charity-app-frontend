@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-// import './index.css';
 import {Router, Route, browserHistory, withRouter} from 'react-router';
 import ViewPost from './Components/Admin/ViewPosts/ViewPost.jsx';
 import EditPost from './Components/Admin/EditPost/EditPost.jsx';
@@ -82,13 +81,13 @@ class Index extends Component {
         console.log(response)
 
         if (!response.data.msg === "Pong") {
-          browserHistory.push("/")
+          browserHistory.replace("/")
         }
       }).catch((err) => {
         console.log(err)
       })
     } else {
-      browserHistory.push("/")
+      browserHistory.replace("/")
     }
 
   }

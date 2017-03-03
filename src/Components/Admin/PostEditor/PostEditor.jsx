@@ -19,10 +19,15 @@ class PostEditor extends Component {
     }
     render() {
         return (
-            <div className="wrapper">
-                <PostTitle changeTitleState={this.changeTitle}/>
-                <SimpleMDE value={this.state.textValue} onChange={this.handleChange}/>
-                <SaveButton getEditorContent={this.convertMDToHtml}/>
+            <div className="columns">
+                <div className="column is-half is-offset-one-quarter">
+                    <h1 className="title">
+                        View a post
+                    </h1>
+                    <PostTitle changeTitleState={this.changeTitle}/>
+                    <SimpleMDE value={this.state.textValue} onChange={this.handleChange}/>
+                    <SaveButton getEditorContent={this.convertMDToHtml}/>
+                </div>
             </div>
         );
     }

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import PostInfo from './PostInfo';
-import "./css/loader.css";
+
 const removeMd = require("remove-markdown");
 
 const marked = require("marked");
@@ -16,44 +16,46 @@ class ClientViewer extends Component {
 
     render() {
         return (
+
             <div className="columns">
                 <div className="column is-half is-offset-one-quarter">
-                    <div className="content">
 
-                        {/*<h1>
+                    {/*<h1>
                     Created Posts
                 </h1>*/}
-                        <section id="blocks">
-                            {(this.state.posts.length > 0)
-                                ? (this.state.posts.map((postItem, index) => {
+                    <section id="blocks">
 
-                                    let postItemSummary = null || removeMd(postItem.body).split(" ")
+                        {(this.state.posts.length > 0)
+                            ? (this.state.posts.map((postItem, index) => {
 
-                                    if (postItemSummary.length > 15) {
-                                        postItemSummary = postItemSummary
-                                            .slice(0, postItemSummary.length / 2)
-                                            .join(" ")
-                                    }
+                                let postItemSummary = null || removeMd(postItem.body).split(" ")
 
-                                    return (<PostInfo
-                                        title={postItem.title}
-                                        postSummary={postItemSummary}
-                                        body
-                                        ={postItem.html}
-                                        id={postItem._id}
-                                        key={index}/>)
-                                }))
+                                if (postItemSummary.length > 15) {
+                                    postItemSummary = postItemSummary
+                                        .slice(0, postItemSummary.length / 2)
+                                        .join(" ")
+                                }
 
-                                : <div className="columuns">
-                                    <div className="column is-half is-offset-one-quarter">
+                                return (<PostInfo
+                                    title={postItem.title}
+                                    postSummary={postItemSummary}
+                                    body
+                                    ={postItem.html}
+                                    id={postItem._id}
+                                    key={index}/>)
+                            }))
 
-                                        Loading ...
-                                    </div>
-                                </div>}
-                        </section>
-                    </div>
+                            : <div className="columuns">
+                                <div className="column is-half is-offset-one-quarter">
+
+                                    Loading ...
+                                </div>
+                            </div>}
+
+                    </section>
                 </div>
             </div>
+
         );
     }
 

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import axios from "axios";
-import CloseButton from "./CloseButton.jsx";
 
 class NavBar extends Component {
     constructor(props) {
@@ -36,6 +35,8 @@ class NavBar extends Component {
                         <Link className="nav-item" to="/about">About</Link>
 
                         <Link className="nav-item" to="/contact">Contact</Link>
+                        <Link className="nav-item" to="/admin">Login
+                        </Link>
                     </div>
 
                 </nav>

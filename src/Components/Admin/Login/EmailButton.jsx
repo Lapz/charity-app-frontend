@@ -5,7 +5,10 @@ class EmailButton extends Component {
         return (
 
             <p className="control">
-                <button onSubmit={this.props.handleClick} className="button is-primary">{this.props.buttonText}</button>
+                <button
+                    type={this.props.type}
+                    onSubmit={this.props.handleClick}
+                    className="button is-primary">{this.props.buttonText}</button>
             </p>
         );
     }

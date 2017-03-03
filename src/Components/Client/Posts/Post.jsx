@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from "axios";
-import "./css/loader.css"
+
 import PreviousButton from "./PreviousButton.jsx"
 class Post extends Component {
     constructor() {

@@ -11,10 +11,16 @@ $main-color: lightgrey;
 }
 
 
-.content {
-  background-color: #c0e8e3;
+.homepage-box{
+  @extend .box ;
+
+  background-color: #c1e7ff;
 }
 
-article{
-  border: thick 2px #00658f;
+.homepage-box p {
+  color: #ffffff;
 }
+
+
+
+

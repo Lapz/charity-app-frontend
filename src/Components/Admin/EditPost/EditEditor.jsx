@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import "./css/Editor.css"
 import SaveButton from "./SaveButton.jsx";
 import axios from "axios";
 import EditPostTitle from "./EditPostTitle.jsx"
@@ -31,7 +30,7 @@ class EditEditor extends Component {
 
     render() {
         return (
-            <div className="wrapper">
+            <div>
                 <EditPostTitle changeTitleState={this.changeTitle}/>
                 <SimpleMDE value={this.state.savedState} onChange={this.handleChange}/>
                 <SaveButton getEditorContent={this.convertMDToHtml}/>
