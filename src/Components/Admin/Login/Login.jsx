@@ -34,7 +34,7 @@ class Login extends Component {
                             placeholder="JohnAppleSeed@example.com"
                             labelName="Email"/>
 
-                        <EmailField identifier="Password" labelName="Password" placeholder="******"/>
+                        <EmailField type="password" identifier="Password" labelName="Password" placeholder="******"/>
 
                         <EmailButton buttonText="Login"/>
                     </form>
