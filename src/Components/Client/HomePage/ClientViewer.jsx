@@ -6,6 +6,8 @@ const removeMd = require("remove-markdown");
 
 const marked = require("marked");
 
+const summaryTool = require("node-summary");
+
 class ClientViewer extends Component {
     constructor() {
         super()
@@ -28,13 +30,15 @@ class ClientViewer extends Component {
                         {(this.state.posts.length > 0)
                             ? (this.state.posts.map((postItem, index) => {
 
-                                let postItemSummary = null || removeMd(postItem.body).split(" ")
+                                let postItemSummary = null || removeMd(postItem.body)
 
-                                if (postItemSummary.length > 15) {
-                                    postItemSummary = postItemSummary
-                                        .slice(0, postItemSummary.length / 2)
-                                        .join(" ")
-                                }
+                                summaryTool.summarize(postItem.title, postItemSummary, (err, summary) => {
+                                    if (err) {
+                                        console.log("Error");
+                                    }
+
+                                    postItemSummary = summary
+                                })
 
                                 return (<PostInfo
                                     title={postItem.title}
