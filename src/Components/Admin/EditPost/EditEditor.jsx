@@ -57,9 +57,6 @@ class EditEditor extends Component {
     }
 
     convertMDToHtml = () => {
-        console.log(this.state.textValue);
-        const editorContent = this.state.textValue;
-        console.log(editorContent);
 
         axios
             .put(`api/posts/${this.props.post_id}`, {

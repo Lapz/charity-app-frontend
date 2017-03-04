@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import "./css/Editor.css"
+
+import Notification from "../SharedComponent/Notification.jsx";
 import SaveButton from "./SaveButton.jsx";
+import PostTitle from "./PostTitle.jsx";
+
 import axios from "axios";
-import PostTitle from "./PostTitle.jsx"
 const SimpleMDE = require("react-simplemde-editor");
 const marked = require("marked");
 
@@ -14,7 +16,8 @@ class PostEditor extends Component {
         super()
         this.state = {
             textValue: "Write a post",
-            title: ""
+            title: "",
+            saved: false
         }
     }
     render() {
@@ -22,8 +25,13 @@ class PostEditor extends Component {
             <div className="columns">
                 <div className="column is-half is-offset-one-quarter">
                     <h1 className="title">
-                        View a post
+                        Add a post
                     </h1>
+
+                    {this.state.saved === true
+                        ? (<Notification closeNoti={this.closeNoti} message="Post was created"/>)
+                        : null
+}
                     <PostTitle changeTitleState={this.changeTitle}/>
                     <SimpleMDE value={this.state.textValue} onChange={this.handleChange}/>
                     <SaveButton getEditorContent={this.convertMDToHtml}/>
@@ -41,11 +49,17 @@ class PostEditor extends Component {
 
         console.log(JSON.stringify(marked(this.state.textValue)))
 
-        axios.post("api/posts", {
+        axios
+            .post("api/posts", {
             title: this.state.title,
             body: this.state.textValue,
             html: marked(this.state.textValue)
         })
+            .then((response) => {
+                if (response.data.message == "Post created") {
+                    this.setState({saved: true})
+                }
+            })
     }
     changeTitle = (value) => {
         this.setState({title: value})
