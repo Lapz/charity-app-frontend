@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import AboutEditor from "./AboutEditor.jsx"
+import AboutEditor from "./AboutEditor.jsx";
+
 class About extends Component {
     render() {
         return (

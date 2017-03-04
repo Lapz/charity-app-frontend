@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-// import "./css/Editor.css"
-import SaveButton from "./SaveButton.jsx";
 import axios from "axios";
+
+import SaveButton from "./SaveButton.jsx";
 
 const SimpleMDE = require("react-simplemde-editor");
 const marked = require("marked");
-
 marked.setOptions({sanitize: true})
 
 class AboutEditor extends Component {
@@ -13,8 +12,7 @@ class AboutEditor extends Component {
     constructor() {
         super()
         this.state = {
-            textValue: "Write a post",
-            title: ""
+            textValue: "Write a post"
         }
     }
 
@@ -30,8 +28,6 @@ class AboutEditor extends Component {
     render() {
         return (
             <div>
-
-                {/*<PostTitle changeTitleState={this.changeTitle}/>*/}
                 <SimpleMDE
                     value={this.state.savedState || this.state.textValue}
                     onChange={this.handleChange}/>

@@ -1,6 +1,11 @@
+// Imports all necessary libarays
+
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import axios from "axios"
+
+//Import Components
+import AdminApp from './AdminApp';
 import {Router, Route, browserHistory, withRouter} from 'react-router';
 import ViewPost from './Components/Admin/ViewPosts/ViewPost.jsx';
 import EditPost from './Components/Admin/EditPost/EditPost.jsx';
@@ -12,17 +17,13 @@ import Client from "./Components/Client/HomePage/Client.jsx"
 import Error404 from "./Components/Errors/404.jsx";
 import Contact from "./Components/Client/Contact/Contact.jsx";
 import AdminAbout from "./Components/Admin/About/About.jsx";
-
 import ClientAbout from "./Components/Client/About/About.jsx"
-import axios from "axios"
+
+// imports bulma
 import "./css/bulma/main.css";
-// axios.defaults.headers.common["Authorization"] = this.state.token import
-// StationSearch from './Components/Admin/StationSearch/StationSearch.jsx';
-// import LineStatus from './Components/Admin/LineStatus/LineItemContainer.jsx';
-// import Favourite from './Components/Admin/Favourites/Favourites.jsx'; import
-// Login from './Components/Admin/Login/Login.jsx'; import * as firebase from
-// 'firebase';
-axios.defaults.baseURL = "http://localhost:3001/"
+
+axios.defaults.baseURL = "http://localhost:3001/";
+
 class Index extends Component {
 
   constructor() {
@@ -48,7 +49,7 @@ class Index extends Component {
           <Route component={Contact} path="/contact"></Route>
         </Route>
 
-        <Route component={App} onEnter={this.checkIfAuth}>
+        <Route component={AdminApp} onEnter={this.checkIfAuth}>
 
           <Route component={ViewPost} path="admin/viewPosts"></Route>
           <Route component={PostEditor} path={"admin/add"}></Route>
@@ -65,7 +66,6 @@ class Index extends Component {
   }
 
   checkIfAuth = () => {
-
     if (this.state.token.length > 3) {
       axios({
         method: "GET",
