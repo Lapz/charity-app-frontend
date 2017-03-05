@@ -4,7 +4,7 @@ class SaveButton extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.handleClick}>Save a post
+                <button className="button is-info" onClick={this.handleClick}>Save a post
                 </button>
             </div>
         );

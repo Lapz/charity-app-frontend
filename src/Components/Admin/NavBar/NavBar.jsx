@@ -1,48 +1,51 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import axios from "axios";
-// import './css/navBar.css'
 
 class NavBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            signindIn: false
+            activeClass: "",
+            hidden: ""
+
         }
     }
 
     render() {
         return (
-            <div className="nav-wrapper">
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="admin/viewPosts">View posts</Link>
-                        </li>
 
-                        <li>
-                            <Link to="admin/about">
-                                About Page
-                            </Link>
-                        </li>
+            <nav className="nav">
 
-                        <li>
-                            <Link to="admin/add">Add a new Post</Link>
-                        </li>
+                <span onClick={this.changeClass} className="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
 
-                        <li>
-                            <Link to="/admin" onClick={this.logout}>Logout</Link>
-                        </li>
+                <div className={`nav-right nav-menu ${this.state.activeClass}`}>
+                    <Link className="nav-item" to="/admin/about">About Page</Link>
+                    <Link className="nav-item" to="/admin/viewPosts">View Posts</Link>
 
-                    </ul>
-                </nav>
-            </div>
+                    <Link className="nav-item" to="/admin/add">Add a new Post</Link>
+
+                    <Link className="nav-item" to="/" onClick={this.logout}>Logout</Link>
+                </div>
+            </nav>
         )
+    }
+
+    changeClass = () => {
+        if (this.state.activeClass == "is-active") {
+            this.setState({activeClass: ""})
+        } else {
+            this.setState({activeClass: "is-active", hidden: "hide"})
+        }
     }
 
     logout = () => {
         axios
-            .get("api/logout")
+            .get("api/logout ")
             .then((response) => {
                 console.log(response)
             })

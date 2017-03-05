@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import "./css/Editor.css"
-import SaveButton from "./SaveButton.jsx";
 import axios from "axios";
-import EditPostTitle from "./EditPostTitle.jsx"
+
+import SaveButton from "./SaveButton.jsx";
+import EditPostTitle from "./EditPostTitle.jsx";
+import Notification from "../SharedComponent/Notification.jsx";
+
 const SimpleMDE = require("react-simplemde-editor");
 const marked = require("marked");
 
@@ -13,9 +15,10 @@ class EditEditor extends Component {
     constructor() {
         super()
         this.state = {
-
+            saved: false,
             title: "",
-            savedState: ""
+            textValue: ""
+            // savedState: ""
         }
     }
 
@@ -25,15 +28,21 @@ class EditEditor extends Component {
             .then((response) => {
                 console.log(response)
 
-                this.setState({savedState: response.data.body})
+                this.setState({textValue: response.data.body, title: response.data.title})
             })
     }
 
     render() {
         return (
-            <div className="wrapper">
-                <EditPostTitle changeTitleState={this.changeTitle}/>
-                <SimpleMDE value={this.state.savedState} onChange={this.handleChange}/>
+            <div>
+
+                {this.state.saved === true
+                    ? (<Notification closeNoti={this.closeNoti} message="Post was updated"/>)
+                    : null
+}
+
+                <EditPostTitle title={this.state.title} changeTitle={this.changeTitle}/>
+                <SimpleMDE value={this.state.textValue} onChange={this.handleChange}/>
                 <SaveButton getEditorContent={this.convertMDToHtml}/>
             </div>
         );
@@ -43,16 +52,23 @@ class EditEditor extends Component {
         this.setState({textValue: value})
     }
 
+    closeNoti = () => {
+        this.setState({saved: false})
+    }
+
     convertMDToHtml = () => {
-        console.log(this.state.textValue)
 
-        console.log(JSON.stringify(marked(this.state.textValue)))
-
-        axios.put(`api/posts/${this.props.post_id}`, {
+        axios
+            .put(`api/posts/${this.props.post_id}`, {
             title: this.state.title,
             body: this.state.textValue,
             html: marked(this.state.textValue)
         })
+            .then((response) => {
+                if (response.data.message == "Post Updated") {
+                    this.setState({saved: true})
+                }
+            })
     }
     changeTitle = (value) => {
         this.setState({title: value})

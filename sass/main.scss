@@ -1,0 +1,26 @@
+
+$background-color: lightblue;
+$main-color: lightgrey;
+@import "../node_modules/bulma/bulma.sass";
+
+@import "../node_modules/bulma/sass/components/nav.sass";
+
+
+.nav {
+  background-color: $background-color
+}
+
+
+.homepage-box{
+  @extend .box ;
+
+  background-color: #c1e7ff;
+}
+
+.homepage-box p {
+  color: #ffffff;
+}
+
+
+
+

@@ -1,33 +1,59 @@
 import React, {Component} from 'react';
-import NormalLogin from './NormalLogin.jsx';
-// import SignUp from'./SignUp.jsx';
-import ErrorModal from './ErrorModal.jsx';
-import './css/login.css';
+import EmailField from "./EmailField.jsx";
+import EmailButton from "./EmailButton.jsx";
+
+// import LoginModal from "./ErrorModal.jsx"
+
+import Modal from "./Modal.jsx";
+import {browserHistory} from 'react-router';
+import axios from "axios";
 
 class Login extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            error: false
+            message: "",
+            modalTrigered: false,
+            loggedIn: false
         }
     }
 
     render() {
         return (
-            <div className="wrapper login-wrapper">
-                {(this.state.error === true)
-                    ? (<ErrorModal
-                        modalClosedButtonPressed={this.modalClosedButtonPressed}
-                        errorMessage={this.state.errorMessage}/>)
-                    : null}
 
-                <div className='login'>
-                    <NormalLogin
-                        onReceiveToken={this.onReceiveToken}
-                        errorModalTrigger={this.errorModalTrigger}/>
+            <div className="columns">
+                <div className="column is-half is-offset-one-quarter">
+                    {(this.state.modalTrigered === true)
+                        ? (
+                            <Modal
+                                handleClose={this.triggerModal}
+                                message={this.state.message}
+                                isActive={this.state.modelTrigered}
+                                handleClose={this.triggerModal}></Modal>
+                        )
+                        : null}
+
+                    <form onSubmit={this.login}>
+
+                        <EmailField
+                            type="email"
+                            identifier="email"
+                            placeholder="JohnAppleSeed@example.com"
+                            labelName="Email"
+                            handleFieldChange={this.handleFieldChange}/>
+
+                        <EmailField
+                            type="password"
+                            identifier="password"
+                            labelName="Password"
+                            placeholder="******"
+                            handleFieldChange={this.handleFieldChange}/>
+
+                        <EmailButton type="submit" buttonText="Login"/>
+                    </form>
+
                 </div>
-
             </div>
         );
     }
@@ -36,17 +62,55 @@ class Login extends Component {
         this.setState({error: false})
     }
 
-    errorModalTrigger = (errorMessage) => {
-        this.setState({error: true, errorMessage: errorMessage})
+    triggerModal = (modalMessage) => {
+
+        const modelTrigger = !this.state.modalTrigered;
+
+        this.setState({modalTrigered: modelTrigger, message: modalMessage})
     }
 
-    onReceiveToken = (token) => {
-        console.log(token + "    2")
+    handleFieldChange = (value, fieldID) => {
+        console.log(value, fieldID)
 
-        this
-            .props
-            .passUpToken(token)
+        const obj = this.state;
+
+        const newState = Object.assign({}, obj, {[fieldID]: value})
+
+        this.setState(newState)
     }
+
+    login = (e) => {
+        e.preventDefault()
+
+        const email = this.state.email;
+        const pass = this.state.password;
+
+        axios
+            .post("auth/authenticate", {
+            username: email,
+            password: pass
+        })
+            .then((response) => {
+                if (response.data.success == true) {
+                    this
+                        .props
+                        .passUpToken(response.data.token)
+
+                    browserHistory.replace("/admin/add")
+                } else {
+                    // console.log(response)
+                    this.triggerModal(response.data.msg)
+                }
+
+            })
+            .catch((err) => {
+
+                console.log(err)
+                this.triggerModal(e.message)
+            })
+
+    }
+
 }
 
 export default Login;

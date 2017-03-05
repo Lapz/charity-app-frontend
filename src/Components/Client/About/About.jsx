@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import "./css/about.css";
-import "./css/loader.css";
+
 import axios from "axios"
 class About extends Component {
     constructor() {
@@ -13,20 +12,23 @@ class About extends Component {
 
         return ((this.state.body.__html)
             ? (
-                <div className="about-content-wrapper">
-                    <h1>{this.state.title}</h1>
-                    {/*<PreviousButton/>*/}
 
-                    <div className="about-content" dangerouslySetInnerHTML={this.state.body}></div>
+                <div className="columns">
+                    <div className="column is-half is-offset-one-quarter">
+                        <div className="content">
+                            <h1>{this.state.title}</h1>
+                            {/*<PreviousButton/>*/}
+
+                            <div dangerouslySetInnerHTML={this.state.body}></div>
+                        </div>
+                    </div>
                 </div>
             )
             : (
-                <div className=" post-loading loader">
-                    <div className="line-scale-party">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                <div className="columuns">
+                    <div className="column is-half is-offset-one-quarter">
+
+                        Loading ...
                     </div>
                 </div>
             ));

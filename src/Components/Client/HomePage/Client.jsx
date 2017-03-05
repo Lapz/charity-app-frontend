@@ -9,7 +9,7 @@ class Client extends Component {
 
                 <NavBar/> {this.props.children}
 
-                <Footer/>
+                {/*<Footer/>*/}
             </div>
         );
     }
