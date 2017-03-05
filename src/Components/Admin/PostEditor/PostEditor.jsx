@@ -64,6 +64,10 @@ class PostEditor extends Component {
     changeTitle = (value) => {
         this.setState({title: value})
     }
+
+    closeNoti = () => {
+        this.setState({saved: false})
+    }
 }
 
 export default PostEditor;
